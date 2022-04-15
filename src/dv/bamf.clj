@@ -5,6 +5,9 @@
 
 (def base-url "https://www.bamf.de")
 
+(defn sanitize-link [url]
+  (first (str/split url #";")))
+
 (defn extract-locations [source]
   (extract-from
    source
@@ -15,7 +18,7 @@
    ".c-teaser.c-teaser--row" (fn [x] (let [attrs (attrs x)]
                                        {:latitude  (:data-geo-lat attrs)
                                         :longitude (:data-geo-long attrs)}))
-   ".c-teaser__text.c-teaser__text--column .c-link" #(str base-url "/" (reaver/attr % :href))))
+   ".c-teaser__text.c-teaser__text--column .c-link" #(sanitize-link (str base-url "/" (reaver/attr % :href)))))
 
 (defn to-csv [list]
   (str/join "," (map #(str "\"" % "\"") list)))
