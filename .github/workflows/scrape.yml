@@ -34,7 +34,7 @@ jobs:
           git commit -m "Automatic scraping at: ${timestamp}" || exit 0
           git push
       - name: Upload CSV to Google Spreadsheet
-        uses: canonical-web-and-design/csv-to-google-spreadsheet
+        uses: canonical-web-and-design/csv-to-google-spreadsheet@1.0.0
         with:
           csv_path: ./bamf-locations.csv
           spreadsheet_id: ${{ secrets.google_spreadsheet_id }}
