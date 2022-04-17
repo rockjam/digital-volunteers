@@ -6,7 +6,7 @@
 (def base-url "https://www.bamf.de")
 
 (defn sanitize-link [url]
-  (first (str/split url #";")))
+  (first (str/split url #"\?|;")))
 
 (defn extract-locations [source]
   (extract-from
